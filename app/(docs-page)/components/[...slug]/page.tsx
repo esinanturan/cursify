@@ -28,6 +28,18 @@ export async function generateMetadata(props: {
   return {
     title: `${doc.content.metadata.title}`,
     description: doc.content.metadata.description,
+    keywords: doc.content.metadata.tags?.join(', ') || '',
+    openGraph: {
+      title: `${doc.content.metadata.title}`,
+      description: doc.content.metadata.description,
+      type: 'article',
+      tags: doc.content.metadata.tags || [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${doc.content.metadata.title}`,
+      description: doc.content.metadata.description,
+    },
   };
 }
 
