@@ -3,11 +3,9 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/website/theme-provider';
-import { GeistMono } from 'geist/font/mono';
 import Progressbar from '@/lib/progressbar';
 import { siteConfig } from '@/lib/utils';
-import { Banner } from '@/components/website/ui/banner';
-import { ArrowUpRight } from 'lucide-react';
+import { getSoftwareAppSchema, getWebsiteSchema } from '@/app/schema';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -72,7 +70,21 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+  manifest: '/manifest.json',
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
 };
 export default async function RootLayout({
   children,
@@ -95,6 +107,17 @@ export default async function RootLayout({
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
           `}
           </Script>
+
+          <Script
+            id='website-schema'
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebsiteSchema()) }}
+          />
+          <Script
+            id='software-schema'
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(getSoftwareAppSchema()) }}
+          />
         </head>
         <body className={poppins.className}>
           <Progressbar>
