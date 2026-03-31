@@ -25,6 +25,7 @@ import SpringyCursor from '@/registry/components/cursor/common/springy-cursor';
 import BubbleCursor from '@/registry/components/cursor/common/bubble-cursor';
 import Footer from './footer';
 import SmoothFollower from '../../registry/components/cursor/common/smooth-cursor-follower';
+import CarbonAd from './carbon-ads';
 
 function HeroSec() {
   const [blocks, setBlocks] = useState([]);
@@ -132,8 +133,8 @@ function HeroSec() {
   ];
   return (
     <>
-      <main className='min-h-screen h-full pt-24 overflow-hidden  relative  '>
-        <div className='absolute inset-0 top-0 left-0  h-screen w-full items-center px-5 py-24 dark:[background:radial-gradient(87.03%_87.03%_at_50.05%_12.97%,rgba(217,217,217,0)_40%,#000000_100%)] [background:radial-gradient(87.03%_87.03%_at_50.05%_12.97%,rgba(217,217,217,0)_40%,#ffffff_100%)]'></div>
+      <main className='min-h-screen h-full pt-10 overflow-hidden relative'>
+        <div className='absolute inset-0 top-0 left-0 h-screen w-full items-center px-5 py-24 dark:[background:radial-gradient(87.03%_87.03%_at_50.05%_12.97%,rgba(217,217,217,0)_40%,#000000_100%)] [background:radial-gradient(87.03%_87.03%_at_50.05%_12.97%,rgba(217,217,217,0)_40%,#ffffff_100%)]'></div>
         {/* <div className='absolute inset-0 top-0 left-0  h-screen w-full items-center px-5 py-24 bg-gradient-to-r from-gray-800'></div> */}
         <article className='grid gap-4 py-20 relative z-10 sm:px-0 px-4 max-w-screen-xl mx-auto'>
           <a
@@ -187,6 +188,9 @@ function HeroSec() {
             </a>
           </div>
         </article>
+        <div className='flex justify-center items-center'>
+          <CarbonAd />
+        </div>
         <section className='relative  z-[1]'>
           <div className='max-w-screen-xl mx-auto '>
             <div className='w-[850px] mx-auto '>

@@ -50,10 +50,8 @@ function Header() {
               Ship faster with{' '}
               <span className='font-semibold'>UI-Layouts Pro</span>
               <span className='lg:inline-block hidden'>
-                – 100+ Tailwind & React components for production-ready UIs
-              </span>
-              <span className='lg:hidden sm:inline-block hidden'>
-                – 50+ battle-tested components.
+                – 100+ Tailwind & React Blocks & Templates for production-ready
+                UIs
               </span>
             </p>
             <ArrowUpRight

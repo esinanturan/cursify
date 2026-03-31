@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import Image from 'next/image';
+import CarbonAd from './carbon-ads';
 
 interface TocItem {
   title: string;
@@ -106,7 +107,8 @@ export default function TableOfContents({ toc }: TableOfContentsProps) {
                     );
                   })}
                 </ul>
-                <figure className='absolute bottom-2 left-0 w-full'>
+                <CarbonAd />
+                <figure className='absolute bottom-8 left-0 w-full'>
                   <div className='w-[90%] mx-auto relative scale-90'>
                     {images.map((image, index) => {
                       const isActive = index === activeIndex;
