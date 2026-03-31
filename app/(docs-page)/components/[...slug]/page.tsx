@@ -3,9 +3,12 @@ import { Metadata } from 'next';
 import { getDocBySlug, getAllDocs } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 import { Component } from 'lucide-react';
+import Script from 'next/script';
 import TableOfContents from '@/components/website/tableof-compoents';
 import { ComponentPagination } from '@/components/website/code-components/pagination';
 import Footer from '@/components/website/footer';
+import { getBreadcrumbSchema } from '@/app/schema';
+import { siteConfig } from '@/lib/utils';
 
 export async function generateStaticParams() {
   const docs = await getAllDocs();
@@ -29,6 +32,9 @@ export async function generateMetadata(props: {
     title: `${doc.content.metadata.title}`,
     description: doc.content.metadata.description,
     keywords: doc.content.metadata.tags?.join(', ') || '',
+    alternates: {
+      canonical: `${siteConfig.url}/components/${doc.slug}`,
+    },
     openGraph: {
       title: `${doc.content.metadata.title}`,
       description: doc.content.metadata.description,
@@ -56,8 +62,19 @@ export default async function DocPage(props: {
 
   const { default: Content } = doc.content;
 
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', item: siteConfig.url },
+    { name: 'Components', item: `${siteConfig.url}/components` },
+    { name: doc.content.metadata.title, item: `${siteConfig.url}/components/${doc.slug}` },
+  ]);
+
   return (
     <>
+      <Script
+        id={`breadcrumb-${doc.slug}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className='lg:container mx-auto lg:px-0 px-2'>
         <div className='flex w-full lg:gap-3'>
           <section className='xl:mr-0 lg:mr-3 mt-2 prose w-full prose-zinc min-w-0 max-w-full pb-5 dark:prose-invert prose-h1:text-2xl prose-h1:font-semibold prose-h2:text-2xl prose-h2:my-4  prose-h2:py-1  prose-h2:border-b prose-h3:py-1  prose-h2:mt-3 prose-h2:font-medium prose-h3:text-2xl prose-h3:mt-4 prose-h3:mb-2 prose-h3:font-medium prose-strong:font-medium prose-table:block prose-table:overflow-y-auto lg:pt-1'>
